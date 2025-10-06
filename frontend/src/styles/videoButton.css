@@ -1,0 +1,193 @@
+/* Video Demo Button Animations */
+
+/* Play Icon Wrapper */
+.play-icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  filter: drop-shadow(0 0 8px rgba(217, 70, 239, 0.5)) drop-shadow(0 0 12px rgba(236, 72, 153, 0.4));
+}
+
+/* Ripple Wave Animation - Compact and clean circular waves */
+@keyframes ripple-wave {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+/* Wave ripple effect - Clean circles without fill */
+.play-pulse {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid #d946ef;
+  background: transparent;
+  animation: ripple-wave 2s ease-out infinite;
+  pointer-events: none;
+  box-shadow: 0 0 8px rgba(217, 70, 239, 0.4);
+}
+
+/* Create multiple ripple waves using pseudo elements */
+.play-pulse::before,
+.play-pulse::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 1.5px solid #ec4899;
+  background: transparent;
+  pointer-events: none;
+  box-shadow: 0 0 6px rgba(236, 72, 153, 0.3);
+}
+
+.play-pulse::before {
+  animation: ripple-wave 2s ease-out 0.4s infinite;
+  border-color: #f472b6;
+  border-width: 1.5px;
+}
+
+.play-pulse::after {
+  animation: ripple-wave 2s ease-out 0.8s infinite;
+  border-color: #a855f7;
+  border-width: 1.5px;
+}
+
+/* Gentle bounce animation for the Play icon with color */
+@keyframes gentle-bounce {
+  0%, 100% {
+    transform: translateX(0) scale(1);
+  }
+  50% {
+    transform: translateX(3px) scale(1.08);
+  }
+}
+
+@keyframes icon-glow {
+  0%, 100% {
+    filter: 
+      drop-shadow(0 0 6px rgba(236, 72, 153, 0.8))
+      drop-shadow(0 0 12px rgba(217, 70, 239, 0.6));
+  }
+  50% {
+    filter: 
+      drop-shadow(0 0 10px rgba(217, 70, 239, 0.9))
+      drop-shadow(0 0 18px rgba(168, 85, 247, 0.7))
+      drop-shadow(0 0 25px rgba(147, 51, 234, 0.5));
+  }
+}
+
+.play-icon {
+  animation: gentle-bounce 2.5s ease-in-out infinite, icon-glow 2.5s ease-in-out infinite;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #d946ef;
+  stroke-width: 2.5;
+  fill: rgba(217, 70, 239, 0.2);
+}
+
+/* Enhanced hover effects for the button */
+.video-demo-button:hover .play-icon {
+  animation: none;
+  transform: scale(1.35) translateX(3px) rotate(5deg);
+  color: #ec4899;
+  filter: 
+    drop-shadow(0 0 15px rgba(236, 72, 153, 0.9))
+    drop-shadow(0 0 25px rgba(217, 70, 239, 0.7))
+    drop-shadow(0 0 35px rgba(168, 85, 247, 0.5));
+}
+
+.video-demo-button:hover .play-pulse {
+  animation: pulse-ring 1.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  border-width: 3px;
+  opacity: 1;
+  border-color: #ec4899;
+}
+
+/* Colorful gradient glow on hover */
+.video-demo-button:hover {
+  box-shadow: 
+    0 0 30px rgba(217, 70, 239, 0.6),
+    0 0 50px rgba(236, 72, 153, 0.4),
+    0 0 70px rgba(168, 85, 247, 0.3),
+    0 10px 35px -10px rgba(147, 51, 234, 0.5);
+  transform: scale(1.05) translateY(-1px);
+}
+
+/* Active state - when clicking */
+.video-demo-button:active {
+  transform: scale(0.98);
+  box-shadow: 
+    0 0 10px rgba(217, 70, 239, 0.5),
+    0 2px 8px rgba(147, 51, 234, 0.3);
+}
+
+/* Ensure button stays relative for absolute positioning */
+.video-demo-button {
+  overflow: visible;
+}
+
+/* Add pulse ring animation for extra effect */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+/* Button styling - Clean design with gradient border */
+.video-demo-button {
+  position: relative;
+  background: white;
+  border: none;
+}
+
+/* Gradient border using pseudo-element */
+.gradient-border-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem; /* Same as rounded-xl */
+  padding: 2px;
+  background: linear-gradient(135deg, #9333ea, #d946ef, #ec4899);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  box-shadow: 
+    0 0 15px rgba(217, 70, 239, 0.3),
+    0 2px 10px rgba(147, 51, 234, 0.2);
+}
+
+/* Accessibility: Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .play-pulse,
+  .play-icon {
+    animation: none !important;
+  }
+  
+  .video-demo-button:hover .play-icon {
+    transform: scale(1.1);
+  }
+}
